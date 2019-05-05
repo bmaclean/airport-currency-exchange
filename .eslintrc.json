@@ -21,7 +21,8 @@
 		"linebreak-style": ["warn", "unix"],
 		"prettier/prettier": ["warn", {
 			"singleQuote": true,
-			"useTabs": true
+			"useTabs": true,
+			"bracketSpacing": false
 		}],
 		"react/prop-types": ["off"],
         "quotes": ["warn", "single"],
