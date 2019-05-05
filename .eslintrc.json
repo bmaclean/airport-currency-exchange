@@ -2,8 +2,9 @@
     "env": {
         "browser": true,
         "es6": true
-    },
-    "extends": ["eslint:recommended", "plugin:react/recommended"],
+	},
+	"extends": ["eslint:recommended", "plugin:react/recommended", "plugin:prettier/recommended"],
+	"parser": "babel-eslint",
     "parserOptions": {
         "ecmaFeatures": {
             "experimentalObjectRestSpread": true,
@@ -12,24 +13,18 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+		"react",
+		"prettier"
     ],
     "rules": {
-        "indent": [
-            "warn",
-            "tab"
-        ],
-        "linebreak-style": [
-            "warn",
-            "unix"
-        ],
-        "quotes": [
-            "warn",
-            "single"
-        ],
-        "semi": [
-            "warn",
-            "always"
-        ]
+        "indent": ["warn", "tab"],
+		"linebreak-style": ["warn", "unix"],
+		"prettier/prettier": ["warn", {
+			"singleQuote": true,
+			"useTabs": true
+		}],
+		"react/prop-types": ["off"],
+        "quotes": ["warn", "single"],
+		"semi": ["warn", "always"]
     }
 }
