@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Tabs, Tab, withStyles} from '@material-ui/core';
-import {Dashboard, Person} from '@material-ui/icons';
+import {Home, Person} from '@material-ui/icons';
 
 /**
  * NavBar provides a responsive set of tabs for navigation in the app bar.
@@ -20,7 +20,7 @@ function NavBar(props) {
 					[
 						<Tab
 							key="mobile-tab-dashboard"
-							icon={<Dashboard />}
+							icon={<Home />}
 							component={Link}
 							to="/"
 						/>,
@@ -37,7 +37,7 @@ function NavBar(props) {
 							aria-label="Dashboard"
 							className={classes.tab}
 							color="inherit"
-							label="Dashboard"
+							label="Home"
 							component={Link}
 							to="/"
 						/>
@@ -62,7 +62,7 @@ export default withStyles(theme => ({
 		display: 'flex',
 		flexGrow: 1,
 		justifyContent: 'flex-end',
-		alignItems: 'flex-end',
+		alignItems: 'center',
 		[theme.breakpoints.down('xs')]: {
 			alignItems: 'center'
 		}
