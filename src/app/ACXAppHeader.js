@@ -1,13 +1,7 @@
 import React from 'react';
-import {
-	AppBar,
-	IconButton,
-	Toolbar,
-	Button,
-	withStyles,
-	withWidth
-} from '@material-ui/core';
+import {AppBar, Toolbar, withStyles, withWidth} from '@material-ui/core';
 import {isWidthUp} from '../utils';
+import {NavBar} from './';
 import ACXLogo from '../assets/ACX-logo.png';
 import ACXMobileLogo from '../assets/ACX-mobile-logo.png';
 
@@ -16,22 +10,13 @@ import ACXMobileLogo from '../assets/ACX-mobile-logo.png';
  */
 function ACXAppHeader(props) {
 	const {classes, theme, width} = props;
+	const isMobile = !isWidthUp('xs', width, theme);
 
 	return (
 		<AppBar className={classes.appBar} position="sticky" color="primary">
 			<Toolbar>
-				<img
-					src={isWidthUp('xs', width, theme) ? ACXLogo : ACXMobileLogo}
-					alt="ACX Logo"
-				/>
-				<div className={classes.pageButtonContainer}>
-					<Button className={classes.pageButton} color="inherit">
-						Dashboard
-					</Button>
-					<Button className={classes.pageButton} color="inherit">
-						Admin
-					</Button>
-				</div>
+				<img src={isMobile ? ACXMobileLogo : ACXLogo} alt="ACX Logo" />
+				<NavBar isMobile={isMobile} />
 			</Toolbar>
 		</AppBar>
 	);
@@ -44,16 +29,6 @@ export default withWidth({withTheme: true})(
 			[theme.breakpoints.down('xs')]: {
 				height: '60px'
 			}
-		},
-		pageButtonContainer: {
-			height: '100%',
-			display: 'flex',
-			flexGrow: 1,
-			justifyContent: 'flex-end',
-			alignItems: 'flex-end'
-		},
-		pageButton: {
-			width: '150px'
 		}
 	}))(ACXAppHeader)
 );

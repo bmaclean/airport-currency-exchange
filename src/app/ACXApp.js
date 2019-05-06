@@ -1,5 +1,6 @@
 import React from 'react';
-import {ACXAppHeader, ACXThemeProvider} from './';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {ACXAppHeader, ACXThemeProvider, Admin, Dashboard} from './';
 
 /**
  * Top-level component for the Airport Currency Exchange (ACX) App.
@@ -7,7 +8,11 @@ import {ACXAppHeader, ACXThemeProvider} from './';
 export default function ACXApp() {
 	return (
 		<ACXThemeProvider>
-			<ACXAppHeader />
+			<Router>
+				<ACXAppHeader />
+				<Route exact path="/" component={Dashboard} />
+				<Route exact path="/admin" component={Admin} />
+			</Router>
 		</ACXThemeProvider>
 	);
 }
