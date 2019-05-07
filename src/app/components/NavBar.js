@@ -63,14 +63,20 @@ export default withStyles(theme => ({
 		flexGrow: 1,
 		justifyContent: 'flex-end',
 		alignItems: 'center',
-		[theme.breakpoints.down('xs')]: {
+		[theme.breakpoints.down('sm')]: {
 			alignItems: 'center'
 		}
 	},
 	tab: {
-		width: '150px'
+		'&:hover': {
+			backgroundColor: theme.palette.secondary.main,
+			borderRadius: '8px',
+			color: theme.palette.secondary.contrastText,
+			opacity: 1
+		}
 	},
 	tabBar: {
+		margin: 0,
 		color: theme.contrastText
 	}
 }))(NavBar);
