@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppHeader renders without props 1`] = `
+<NavBar
+  classes={
+    Object {
+      "navBarContainer": "NavBar-navBarContainer-1",
+      "tab": "NavBar-tab-2",
+      "tabBar": "NavBar-tabBar-3",
+    }
+  }
+/>
+`;
