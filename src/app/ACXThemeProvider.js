@@ -1,13 +1,25 @@
 import React from 'react';
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
-import {black} from '@material-ui/core/colors';
 
+// retrieved from provided logo and sample website
+const ACX_YELLOW = '#ffef06';
+const BLACK = '#000';
+const WHITE = '#FFF';
+
+// TODO: dark mode; toggle in admin settings
 const THEME = createMuiTheme({
 	palette: {
 		primary: {
-			main: '#ffef06'
+			main: ACX_YELLOW,
+			constrastText: BLACK
 		},
-		secondary: black
+		secondary: {
+			main: BLACK,
+			contrastText: WHITE
+		}
+	},
+	typography: {
+		fontFamily: ['Montserrat', 'sans-serif'].join(',')
 	}
 });
 
