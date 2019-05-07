@@ -19,7 +19,7 @@ function AppHeader(props) {
 
 	return (
 		<AppBar className={classes.appBar} position="sticky" color="primary">
-			<Toolbar className={classes.toolbar}>
+			<Toolbar className={classes.toolbar} disableGutters>
 				{isMobile && logoNode}
 				{!isMobile && (
 					<Typography variant="h5" className={classes.title}>
@@ -50,12 +50,17 @@ export default withWidth({withTheme: true})(
 		title: {
 			fontFamily: theme.typography.fontFamily,
 			margin: 'auto',
-			marginLeft: '10%'
+			marginLeft: '15%'
 		},
 		toolbar: {
-			height: '100%',
+			alignItems: 'center',
 			display: 'flex',
-			alignItems: 'center'
+			height: '100%',
+			paddingRight: '48px',
+			[theme.breakpoints.down('sm')]: {
+				paddingLeft: '16px',
+				paddingRight: '16px'
+			}
 		}
 	}))(AppHeader)
 );

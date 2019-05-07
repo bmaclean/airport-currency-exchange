@@ -2,6 +2,10 @@ import React from 'react';
 import {withStyles} from '@material-ui/core';
 import {CurrencyTable} from '../components';
 
+/**
+ * Home Page is the main dashboard from which the user can interact with the currency table
+ * and see currency update information and remaining balance.
+ */
 function Home(props) {
 	const {classes} = props;
 	// TODO: placeholders
@@ -23,7 +27,8 @@ function Home(props) {
 
 export default withStyles(theme => ({
 	container: {
-		height: '100vh',
+		// TODO: fix height
+		height: '100%',
 		display: 'flex',
 		alignItems: 'center',
 		flexDirection: 'column',
