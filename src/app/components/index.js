@@ -1,3 +1,4 @@
+export {default as AdminSettingRow} from './AdminSettingRow';
 export {default as AppHeader} from './AppHeader';
 export {default as NavBar} from './NavBar';
 export {default as CurrencyTableHead} from './CurrencyTableHead';

@@ -18,7 +18,7 @@
 		"prettier"
     ],
     "rules": {
-        "indent": ["warn", "tab"],
+        "indent": "off",
 		"linebreak-style": ["warn", "unix"],
 		"no-unused-vars": "warn",
 		"prettier/prettier": ["warn", {

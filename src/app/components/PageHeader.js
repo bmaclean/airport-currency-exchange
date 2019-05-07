@@ -15,7 +15,8 @@ function PageHeader(props) {
 export default withStyles(theme => ({
 	headerDiv: {
 		display: 'flex',
-		flexDirection: 'row'
+		flexDirection: 'row',
+		marginBottom: '32px'
 	},
 	icon: {
 		marginRight: '10px'

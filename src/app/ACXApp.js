@@ -1,6 +1,5 @@
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import {withStyles} from '@material-ui/core';
 import {AppHeader} from './components';
 import {Admin, Home} from './pages';
 import {ACXThemeProvider} from './';
