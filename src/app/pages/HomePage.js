@@ -3,10 +3,10 @@ import {withStyles} from '@material-ui/core';
 import {CurrencyTable} from '../components';
 
 /**
- * Home Page is the main dashboard from which the user can interact with the currency table
+ * HomePage is the main dashboard from which the user can interact with the currency table
  * and see currency update information and remaining balance.
  */
-function Home(props) {
+function HomePage(props) {
 	const {classes} = props;
 	// TODO: placeholders
 	const lastUpdated = 'XX/XX/XXXX';
@@ -39,4 +39,4 @@ export default withStyles(theme => ({
 		marginTop: '32px',
 		width: '60%'
 	}
-}))(Home);
+}))(HomePage);

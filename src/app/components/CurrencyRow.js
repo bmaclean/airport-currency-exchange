@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-	TableCell,
-	TableRow
-} from '@material-ui/core';
+import {TableCell, TableRow} from '@material-ui/core';
 
 /**
  * CurrencyRow accepts a given currency object and returns a TableRow for that currency.

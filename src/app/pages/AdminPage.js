@@ -3,16 +3,12 @@ import {Button, withStyles} from '@material-ui/core';
 import {Settings} from '@material-ui/icons';
 import {AdminSettingRow, PageHeader} from '../components';
 
-function Admin(props) {
-	const {classes} = props;
-	// TODO: placeholder
-	const settings = [
-		{label: 'Refresh currency exchange rates every', unit: 'seconds'},
-		{label: 'Commission', unit: 'percent'},
-		{label: 'Surcharge', unit: 'dollars'},
-		{label: 'Minimum Commission', unit: 'dollars'},
-		{label: 'Buy/Sell rate margin', unit: 'percent'}
-	];
+/**
+ * AdminPage is the top-level presentational component for the Admin page. Receives relevant
+ * pieces of state from the Admin container and displays the list of settings and their values.
+ */
+function AdminPage(props) {
+	const {classes, settings} = props;
 
 	return (
 		<div className={classes.container}>
@@ -48,4 +44,4 @@ export default withStyles(theme => ({
 		minWidth: '400px',
 		width: '30%'
 	}
-}))(Admin);
+}))(AdminPage);
