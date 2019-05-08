@@ -1,0 +1,46 @@
+{
+	"currencies": {
+		"USD": {
+			"code": "USD",
+			"name": "United States Dollar",
+			"baseCurrency": true,
+			"initialBalance": 25000
+		},
+		"CAD": {
+			"code": "CAD",
+			"name": "Canadian Dollar",
+			"baseCurrency": false,
+			"initialBalance": 1000
+		},
+		"EUR": {
+			"code": "EUR",
+			"name": "Euro",
+			"baseCurrency": false,
+			"initialBalance": 5000
+		},
+		"GBP": {
+			"code": "GBP",
+			"name": "Pound Sterling",
+			"baseCurrency": false,
+			"initialBalance": 2500
+		},
+		"JPY": {
+			"code": "JPY",
+			"name": "Japanese Yen",
+			"baseCurrency": false,
+			"initialBalance": 1000
+		},
+		"AUD": {
+			"code": "AUD",
+			"name": "Australian dollar",
+			"baseCurrency": false,
+			"initialBalance": 1000
+		},
+		"THB": {
+			"code": "THB",
+			"name": "Thai Baht",
+			"baseCurrency": false,
+			"initialBalance": 25000
+		}
+	}
+}
