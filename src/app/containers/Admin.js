@@ -1,22 +1,44 @@
-import React from 'react';
-import {AdminPage} from '../pages'
+import React, {useState} from 'react';
+import {connect} from 'react-redux';
+import {updateSettings} from '../store/actions';
+import {AdminPage} from '../pages';
 
 /**
  * Admin is the container component for the Admin Page that connects to the Redux store and
  * provide AdminPage with relevant data.
  */
-export default function Admin(props) {
-	const {classes} = props;
-	// TODO: placeholder
-	const settings = [
-		{label: 'Refresh currency exchange rates every', unit: 'seconds'},
-		{label: 'Commission', unit: 'percent'},
-		{label: 'Surcharge', unit: 'dollars'},
-		{label: 'Minimum Commission', unit: 'dollars'},
-		{label: 'Buy/Sell rate margin', unit: 'percent'}
-	];
+function Admin(props) {
+	const {dispatch, settings} = props;
+	const [localSettings, updateLocalSettings] = useState(settings);
+
+	// dispatch all setting updates when 'Update' is selected on Admin page
+	const update = () => {
+		dispatch(updateSettings(localSettings));
+	};
+
+	// control local setting updates
+	const updateSetting = (key, value) => {
+		updateLocalSettings({
+			...localSettings,
+			[key]: {
+				...localSettings[key],
+				value
+			}
+		});
+	};
 
 	return (
-		<AdminPage settings={settings} />
+		<AdminPage
+			settings={localSettings}
+			update={update}
+			updateSetting={updateSetting}
+		/>
 	);
 }
+
+function mapStateToProps(state) {
+	const {settings} = state;
+	return {settings};
+}
+
+export default connect(mapStateToProps)(Admin);

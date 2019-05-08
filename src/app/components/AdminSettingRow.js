@@ -8,7 +8,7 @@ import {InputAdornment, TextField, withStyles} from '@material-ui/core';
  * Provided type is one of: dollars, percent, seconds.
  */
 function AdminSettingRow(props) {
-	const {classes, label, type, value, onChange} = props;
+	const {classes, label, type, settingKey, value, updateSetting} = props;
 	const unitSymbol = {
 		dollars: '$',
 		percent: '%',
@@ -28,7 +28,7 @@ function AdminSettingRow(props) {
 				type={inputType[type] || undefined}
 				variant="outlined"
 				value={value}
-				onChange={onChange}
+				onChange={e => updateSetting(settingKey, e.target.value)}
 				InputProps={{
 					endAdornment: (
 						<InputAdornment position="end">{unitSymbol[type]}</InputAdornment>
