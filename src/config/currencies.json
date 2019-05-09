@@ -1,45 +1,46 @@
 {
+	"baseCurrency": "USD",
 	"currencies": {
 		"USD": {
 			"code": "USD",
 			"name": "United States Dollar",
-			"baseCurrency": true,
+			"symbol": "$",
 			"initialBalance": 25000
 		},
 		"CAD": {
 			"code": "CAD",
 			"name": "Canadian Dollar",
-			"baseCurrency": false,
+			"symbol": "$",
 			"initialBalance": 1000
 		},
 		"EUR": {
 			"code": "EUR",
 			"name": "Euro",
-			"baseCurrency": false,
+			"symbol": "€",
 			"initialBalance": 5000
 		},
 		"GBP": {
 			"code": "GBP",
 			"name": "Pound Sterling",
-			"baseCurrency": false,
+			"symbol": "£",
 			"initialBalance": 2500
 		},
 		"JPY": {
 			"code": "JPY",
 			"name": "Japanese Yen",
-			"baseCurrency": false,
+			"symbol": "¥",
 			"initialBalance": 1000
 		},
 		"AUD": {
 			"code": "AUD",
 			"name": "Australian dollar",
-			"baseCurrency": false,
+			"symbol": "$",
 			"initialBalance": 1000
 		},
 		"THB": {
 			"code": "THB",
 			"name": "Thai Baht",
-			"baseCurrency": false,
+			"symbol": "฿",
 			"initialBalance": 25000
 		}
 	}
