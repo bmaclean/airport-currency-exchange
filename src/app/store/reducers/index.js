@@ -1,10 +1,15 @@
-import {combineReducers} from 'redux';
-import {BUY_CURRENCY, SELL_CURRENCY} from '../actions';
+import {handleActions} from 'redux-actions';
+import {set} from 'timm';
+import {
+	BUY_CURRENCY,
+	SELL_CURRENCY,
+	RECEIVE_CURRENCIES,
+	UPDATE_SETTINGS,
+} from '../actions';
+import * as CH from './helpers/CurrencyHelpers';
 import currencyConfig from '../../../config/currencies.json';
 
 const INITIAL_STATE = {
-	// The base currency in which we're trading
-	baseCurrency: 'USD',
 	// admin settings
 	settings: {
 		refreshRate: {
@@ -21,7 +26,7 @@ const INITIAL_STATE = {
 		// Percentage of each transaction earned as commission
 		commissionPct: {
 			label: 'Commission',
-			value: 0.10,
+			value: 0.1,
 			unit: 'percent'
 		},
 		// Additional flat rate surchage on every transaction
@@ -31,90 +36,98 @@ const INITIAL_STATE = {
 			unit: 'dollars'
 		},
 		// The minimum commission amount per transaction
-		minCommision: {
+		minCommission: {
 			label: 'Minimum Commission',
-			value: 2.50,
+			value: 2.5,
 			unit: 'dollars'
-		},
+		}
 	},
-	// set of currencies
-	currencies: {
-		USD: {
+	// list of currencies, initialized using configuration file
+	currencies: [
+		{
 			code: currencyConfig.currencies.USD.code,
 			name: currencyConfig.currencies.USD.name,
+			symbol: currencyConfig.currencies.USD.symbol,
 			buyRate: 1,
 			sellRate: 1,
 			balance: currencyConfig.currencies.USD.initialBalance
 		},
 
-		CAD: {
+		{
 			code: currencyConfig.currencies.CAD.code,
 			name: currencyConfig.currencies.CAD.name,
+			symbol: currencyConfig.currencies.CAD.symbol,
 			buyRate: 1,
 			sellRate: 1,
 			balance: currencyConfig.currencies.CAD.initialBalance
 		},
 
-		EUR: {
+		{
 			code: currencyConfig.currencies.EUR.code,
 			name: currencyConfig.currencies.EUR.name,
+			symbol: currencyConfig.currencies.EUR.symbol,
 			buyRate: 1,
 			sellRate: 1,
 			balance: currencyConfig.currencies.EUR.initialBalance
 		},
 
-		GBP: {
+		{
 			code: currencyConfig.currencies.GBP.code,
 			name: currencyConfig.currencies.GBP.name,
+			symbol: currencyConfig.currencies.GBP.symbol,
 			buyRate: 1,
 			sellRate: 1,
 			balance: currencyConfig.currencies.GBP.initialBalance
 		},
 
-		JPY: {
+		{
 			code: currencyConfig.currencies.JPY.code,
 			name: currencyConfig.currencies.JPY.name,
+			symbol: currencyConfig.currencies.JPY.symbol,
 			buyRate: 1,
 			sellRate: 1,
 			balance: currencyConfig.currencies.JPY.initialBalance
 		},
 
-		AUD: {
+		{
 			code: currencyConfig.currencies.AUD.code,
 			name: currencyConfig.currencies.AUD.name,
+			symbol: currencyConfig.currencies.AUD.symbol,
 			buyRate: 1,
 			sellRate: 1,
 			balance: currencyConfig.currencies.AUD.initialBalance
 		},
-
-		THB: {
+		{
 			code: currencyConfig.currencies.THB.code,
 			name: currencyConfig.currencies.THB.name,
+			symbol: currencyConfig.currencies.THB.symbol,
 			buyRate: 1,
 			sellRate: 1,
 			balance: currencyConfig.currencies.THB.initialBalance
 		}
-	}
+	]
 };
 
-function currencies(state = INITIAL_STATE.currencies, action) {
-	switch (action.type) {
-		case BUY_CURRENCY:
-			break;
-		case SELL_CURRENCY:
-			break;
-		default:
+const acxAppReducer = handleActions(
+	{
+		[BUY_CURRENCY]: (state, action) => {
 			return state;
-	}
-}
+		},
 
-function settings(state = INITIAL_STATE.settings, action) {
-	return state;
-}
+		[SELL_CURRENCY]: (state, action) => {
+			return state;
+		},
 
-export const acxApp = combineReducers({
-	currencies,
-	settings
-});
+		[RECEIVE_CURRENCIES]: (state, action) => {
+			return CH.updateCurrencyRates(state, action.rates, '0.08');
+		},
 
-export default acxApp;
+		[UPDATE_SETTINGS]: (state, action) => {
+			state = set(state, 'settings', action.updatedSettings);
+			return state;
+		}
+	},
+	INITIAL_STATE
+);
+
+export default acxAppReducer;
