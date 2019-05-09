@@ -1,18 +1,23 @@
 import React from 'react';
 import {TableCell, TableRow} from '@material-ui/core';
+import {toDecimalPlace} from '../helpers';
 
 /**
  * CurrencyRow accepts a given currency object and returns a TableRow for that currency.
  */
-export default function CurrencyTableHead(props) {
-	const {currency, ...rest} = props;
+export default function CurrencyRow(props) {
+	const {currency, openTrader, ...rest} = props;
 
 	return (
 		<TableRow hover {...rest}>
 			<TableCell>{currency.code}</TableCell>
-			<TableCell>1.000</TableCell>
-			<TableCell>2.000</TableCell>
-			<TableCell>3.000</TableCell>
+			<TableCell onClick={() => openTrader('Buy', currency)}>
+				{toDecimalPlace(currency.buyRate, 4)}
+			</TableCell>
+			<TableCell onClick={() => openTrader('Sell', currency)}>
+				{toDecimalPlace(currency.sellRate, 4)}
+			</TableCell>
+			<TableCell>{toDecimalPlace(currency.balance, 2)}</TableCell>
 		</TableRow>
 	);
 }

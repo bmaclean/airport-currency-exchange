@@ -1,13 +1,6 @@
 import React from 'react';
-import {
-	Table,
-	TableBody,
-	TableRow,
-	TableCell,
-	withStyles
-} from '@material-ui/core';
+import {Table, TableBody, withStyles} from '@material-ui/core';
 import {grey} from '@material-ui/core/colors';
-import currencyConfig from '../../config/currencies.json';
 import {CurrencyRow, CurrencyTableHead} from './';
 
 /**
@@ -15,21 +8,18 @@ import {CurrencyRow, CurrencyTableHead} from './';
  * amounts.
  */
 function CurrencyTable(props) {
-	const {classes, openTrader, ...rest} = props;
-	const currencyList = currencyConfig.currencies.filter(
-		currency => !currency.baseCurrency
-	);
+	const {classes, currencies, openTrader, ...rest} = props;
 
 	return (
 		<Table {...rest}>
 			<CurrencyTableHead />
-			<TableBody stripedRows className={classes.tableBody}>
-				{currencyList.map(currency => (
+			<TableBody className={classes.tableBody}>
+				{currencies.map(currency => (
 					<CurrencyRow
 						key={currency.code}
 						currency={currency}
 						hover
-						onClick={openTrader}
+						openTrader={openTrader}
 					/>
 				))}
 			</TableBody>

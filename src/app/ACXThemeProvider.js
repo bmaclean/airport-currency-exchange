@@ -11,6 +11,7 @@ const THEME = createMuiTheme({
 	palette: {
 		primary: {
 			main: ACX_YELLOW,
+			dark: BLACK,
 			constrastText: BLACK
 		},
 		secondary: {
