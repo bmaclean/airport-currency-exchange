@@ -3,5 +3,7 @@ export {default as AppHeader} from './AppHeader';
 export {default as CurrencyRow} from './CurrencyRow';
 export {default as CurrencyTableHead} from './CurrencyTableHead';
 export {default as CurrencyTable} from './CurrencyTable';
+export {default as CurrencyTransactionBody} from './CurrencyTransactionBody';
+export {default as CurrencyTransactionModal} from './CurrencyTransactionModal';
 export {default as NavBar} from './NavBar';
 export {default as PageHeader} from './PageHeader';

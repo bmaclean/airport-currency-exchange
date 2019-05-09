@@ -8,9 +8,10 @@ import {ACXThemeProvider} from './';
 import ACXLogo from '../assets/logo.jpg';
 
 /**
- * Top-level component for the Airport Currency Exchange (ACX) App.
+ * Top-level component for the Airport Currency Exchange (ACX) App. Provides redux store and theme context
+ * to application subtree. Handles app routing.
  */
-export default function ACXApp() {
+export default function ACXApp(props) {
 	return (
 		<Provider store={store}>
 			<ACXThemeProvider>
