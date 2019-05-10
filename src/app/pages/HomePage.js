@@ -73,7 +73,11 @@ export default withStyles(theme => ({
 		alignItems: 'center',
 		flexDirection: 'column',
 		fontFamily: theme.typography.fontFamily,
-		marginTop: '32px'
+		marginTop: '32px',
+		[theme.breakpoints.down('sm')]: {
+			marginLeft: '16px',
+			alignItems: 'flex-start',
+		}
 	},
 	table: {
 		marginTop: '32px',

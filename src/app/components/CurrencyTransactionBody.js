@@ -45,6 +45,9 @@ export default withStyles(theme => ({
 		display: 'flex',
 		justifyContent: 'space-between',
 		marginTop: '8px',
-		width: '400px'
+		width: '400px',
+		[theme.breakpoints.down('sm')]: {
+			width: '100%'
+		}
 	}
 }))(CurrencyTransactionBody);

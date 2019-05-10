@@ -9,7 +9,7 @@ About Airport Currency Exchange is an application for managing a currency exchan
 - **Surcharge** - The additional surcharge on each transaction.
 - **Minimum Commission** - The minimum commission that the agent earns on each transaction.
 
-The **`Buy Rate`** listed on the Home page is the rate at which clients can buy a given currency from the exchange office. The **`Sell Rate`** listed on the Home page is the rate at which clients can sell a given currency back to the exchange office in exchange for local currency. 
+The **`Buy Rate`** listed on the Home page is the rate at which the exchange can buy a given currency from the client. The **`Sell Rate`** listed on the Home page is the rate at which clients can buy a given currency from the exchange office in exchange for local currency.
 
 ### Development
 
@@ -21,7 +21,7 @@ The following improvements are features and fixes that I would implement given m
 
 - **Validation** - The application has minimal validation, requiring only that numerical inputs are numerical. Inputs should be required to be non-negative, and should be validated through form submission.
 - **Refactoring** - As I implemented the last remaining features, some components (such as `CurrencyTransactionModal`) became quite bloated. Given more time, these components could be refactored to follow SRP and be more composable.
-- **Testing** - While working to complete the code challenge this week, writing consistent unit tests fell by the wayside. I normally write tests progressively as I work through problems, but this became less of a priority as I worked to complete the challenge.
+- **Testing** - While working to complete the code challenge this week, writing consistent unit tests fell by the wayside. I normally write tests progressively as I work through problems, but felt my time was better spent implementing as many features as possible.
 - **Redux-Saga** - Currently, the application uses the Hooks useEffect API to intermittently poll for currency data. Given that I was most unfamiliar with Redux-Saga, I didn't leverage it to manage asynchronous data fetching, though I'd like to do so in the future.
 
 ### Final Comments
