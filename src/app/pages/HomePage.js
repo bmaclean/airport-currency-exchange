@@ -76,7 +76,7 @@ export default withStyles(theme => ({
 		marginTop: '32px',
 		[theme.breakpoints.down('sm')]: {
 			marginLeft: '16px',
-			alignItems: 'flex-start',
+			alignItems: 'flex-start'
 		}
 	},
 	table: {
