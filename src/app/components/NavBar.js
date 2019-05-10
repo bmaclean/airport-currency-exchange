@@ -1,13 +1,21 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Tabs, Tab, withStyles} from '@material-ui/core';
+import {Error} from '@material-ui/icons';
 import {Home, Person} from '@material-ui/icons';
 
 /**
  * NavBar provides a responsive set of tabs for navigation in the app bar.
  */
 function NavBar(props) {
-	const {classes, isMobile} = props;
+	const {classes, isMobile, pollingFailed} = props;
+	const homeLabel = pollingFailed ? (
+		<span className={classes.errorLabel}>
+			Home <Error />
+		</span>
+	) : (
+		'Home'
+	);
 
 	return (
 		<div className={classes.navBarContainer}>
@@ -37,7 +45,7 @@ function NavBar(props) {
 							aria-label="Dashboard"
 							className={classes.tab}
 							color="inherit"
-							label="Home"
+							label={homeLabel}
 							component={Link}
 							to="/"
 						/>
@@ -57,6 +65,12 @@ function NavBar(props) {
 }
 
 export default withStyles(theme => ({
+	errorLabel: {
+		display: 'flex',
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-around'
+	},
 	navBarContainer: {
 		height: '100%',
 		display: 'flex',

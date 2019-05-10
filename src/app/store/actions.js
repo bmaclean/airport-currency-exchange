@@ -63,6 +63,7 @@ export function updateSettings(updatedSettings) {
 export function receiveCurrencies(currencyData) {
 	return {
 		type: RECEIVE_CURRENCIES,
+		date: currencyData.date,
 		rates: currencyData.rates,
 		receivedAt: Date.now()
 	};
@@ -83,13 +84,15 @@ export function fetchCurrencies(baseCurrency, currencies) {
 			)}`
 		)
 			.then(
-				response => receiveCurrencies(response.json()),
+				response => response.json(),
 				error => {
 					// eslint-disable-next-line no-console
 					console.error('An error occurred.', error);
 					return fetchCurrenciesFailed();
 				}
 			)
-			.then(action => dispatch(action));
+			.then(data =>
+				data.type ? dispatch(data) : dispatch(receiveCurrencies(data))
+			);
 	};
 }

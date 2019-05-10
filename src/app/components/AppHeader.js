@@ -1,4 +1,6 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {compose} from 'recompose';
 import {
 	AppBar,
 	Toolbar,
@@ -13,7 +15,8 @@ import {NavBar} from './';
  * AppHeader is the responsive application header with title logo and Home/Menu navigation
  */
 function AppHeader(props) {
-	const {classes, logo, theme, title, width} = props;
+	const {classes, logo, theme, polling, title, width} = props;
+	const pollingFailed = !polling.pollingSuccessful;
 	const isMobile = !isWidthUp('sm', width, theme);
 	const logoNode = <img className={classes.logo} src={logo} alt="ACX Logo" />;
 
@@ -26,14 +29,21 @@ function AppHeader(props) {
 						{title}
 					</Typography>
 				)}
-				<NavBar isMobile={isMobile} />
+				<NavBar isMobile={isMobile} pollingFailed={pollingFailed} />
 				{!isMobile && logoNode}
 			</Toolbar>
 		</AppBar>
 	);
 }
 
-export default withWidth({withTheme: true})(
+function mapStateToProps(state) {
+	const {polling} = state;
+	return {polling};
+}
+
+const enhance = compose(
+	connect(mapStateToProps),
+	withWidth({withTheme: true}),
 	withStyles(theme => ({
 		appBar: {
 			height: '120px',
@@ -62,5 +72,7 @@ export default withWidth({withTheme: true})(
 				paddingRight: '16px'
 			}
 		}
-	}))(AppHeader)
+	}))
 );
+
+export default enhance(AppHeader);

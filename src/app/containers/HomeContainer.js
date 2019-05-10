@@ -8,22 +8,26 @@ import config from '../../config/currencies.json';
  * provide HomePage with relevant data.
  */
 function HomeContainer(props) {
-	const {currencies} = props;
+	const {currencies, polling} = props;
 	const baseCurrency = currencies.find(
 		currency => currency.code === config.baseCurrency
 	);
-	const filteredCurrencies = currencies
-		.filter(currency => currency.code !== config.baseCurrency)
-		.sort((a, b) => a.code > b.code);
+	const filteredCurrencies = currencies.filter(
+		currency => currency.code !== config.baseCurrency
+	);
 
 	return (
-		<HomePage currencies={filteredCurrencies} baseCurrency={baseCurrency} />
+		<HomePage
+			currencies={filteredCurrencies}
+			baseCurrency={baseCurrency}
+			lastUpdated={polling.updatedAt}
+		/>
 	);
 }
 
 function mapStateToProps(state) {
-	const {currencies} = state;
-	return {currencies};
+	const {currencies, polling} = state;
+	return {currencies, polling};
 }
 
 export default connect(mapStateToProps)(HomeContainer);

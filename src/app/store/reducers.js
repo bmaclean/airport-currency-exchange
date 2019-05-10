@@ -1,5 +1,6 @@
 import {handleActions} from 'redux-actions';
 import {set} from 'timm';
+import moment from 'moment';
 import {
 	BUY_CURRENCY,
 	SELL_CURRENCY,
@@ -13,7 +14,13 @@ import currencyConfig from '../../config/currencies.json';
 const INITIAL_STATE = {
 	polling: {
 		// whether or not the previous currency poll was successful
-		pollingSuccessful: true
+		pollingSuccessful: true,
+		// date and time of last update
+		updatedAt: moment().format('MMMM Do YYYY, h:mm:ss a'),
+		// date that the API last updated currency rates
+		// note: it will be much less expensive to simply check if the API has updated than to deep compare
+		// previous and future states
+		apiLastUpdated: ''
 	},
 	// admin settings
 	settings: {
@@ -144,16 +151,25 @@ const acxAppReducer = handleActions(
 
 		[RECEIVE_CURRENCIES]: (state, action) => {
 			// in updateCurrencyRate, compare previous
-			let newState = CH.updateCurrencyRates(
-				state,
-				action.rates,
-				state.settings.marginPct.value
-			);
-			return CH.setPollingSuccess(newState, true);
+			let newState;
+			if (action.date === state.polling.apiLastUpdated) {
+				newState = CH.stochasticUpdateCurrencyRates(
+					state,
+					action.rates,
+					state.settings.marginPct.value
+				);
+			} else {
+				newState = CH.updateCurrencyRates(
+					state,
+					action.rates,
+					state.settings.marginPct.value
+				);
+			}
+			return CH.updatePollingData(newState, true, action.date);
 		},
 
 		[FETCH_CURRENCIES_FAILURE]: (state, action) => {
-			return CH.setPollingSuccess(state, false);
+			return CH.updatePollingData(state, false, '');
 		},
 
 		[UPDATE_SETTINGS]: (state, action) => {
