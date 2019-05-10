@@ -7,3 +7,4 @@ export {default as CurrencyTransactionBody} from './CurrencyTransactionBody';
 export {default as CurrencyTransactionModal} from './CurrencyTransactionModal';
 export {default as NavBar} from './NavBar';
 export {default as PageHeader} from './PageHeader';
+export {default as Snackbar} from './Snackbar';

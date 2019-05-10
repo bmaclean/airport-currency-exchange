@@ -26,9 +26,9 @@ function CurrencyTransactionModal(props) {
 		dispatch,
 		open,
 		closeModal,
-		symbol,
 		transactionType,
-		rate
+		rate,
+		onInvalidTransaction
 	} = props;
 
 	let [amount, setAmount] = useState('');
@@ -47,17 +47,36 @@ function CurrencyTransactionModal(props) {
 		closeModal();
 	};
 
+	// TODO: move funds validation?
 	// receive the transaction type, currency code, and amount, then dispatch corresponding action
 	const transact = () => {
 		switch (transactionType) {
 			case 'Buy':
-				// receive `total` of base currency, lose `amount` of requested currency
-				dispatch(buyCurrency(baseCurrency.code, total, currency, amount));
+				if (currency.balance < amount) {
+					onInvalidTransaction(`Insufficient funds for ${currency.code}`);
+				} else {
+					// receive `total` of base currency, lose `amount` of requested currency
+					dispatch(
+						buyCurrency(baseCurrency.code, total, currency.code, amount)
+					);
+				}
 				break;
 			case 'Sell':
-				// lose `amount` of base currency, receive `total` of requested currency
-				dispatch(sellCurrency(baseCurrency.code, amount, currency, total));
+				if (baseCurrency.balance < amount) {
+					onInvalidTransaction(`Insufficient funds for ${baseCurrency.code}`);
+				} else {
+					// lose `amount` of base currency, receive `total` of requested currency
+					dispatch(
+						sellCurrency(baseCurrency.code, total, currency.code, amount)
+					);
+				}
 				break;
+			default:
+				// eslint-disable-next-line no-console
+				console.trace(
+					'Attempted transaction with invalid transactionType in CurrencyTransactionModal'
+				);
+				return;
 		}
 		resetAndClose();
 	};
@@ -69,7 +88,7 @@ function CurrencyTransactionModal(props) {
 			aria-labelledby="form-dialog-title"
 		>
 			<DialogTitle id="form-dialog-title">
-				{transactionType + ' ' + currency}
+				{transactionType + ' ' + currency.code}
 			</DialogTitle>
 			<DialogContent>
 				<TextField
@@ -81,7 +100,9 @@ function CurrencyTransactionModal(props) {
 					onChange={e => setAmount(e.target.value)}
 					InputProps={{
 						startAdornment: (
-							<InputAdornment position="start">{symbol}</InputAdornment>
+							<InputAdornment position="start">
+								{currency.symbol}
+							</InputAdornment>
 						),
 						endAdornment: <InputAdornment position="end">.00</InputAdornment>
 					}}
@@ -107,8 +128,8 @@ function CurrencyTransactionModal(props) {
 }
 
 function mapStateToProps(state) {
-	const {settings, currencies} = state;
-	return {settings, currencies};
+	const {settings} = state;
+	return {settings};
 }
 
 export default connect(mapStateToProps)(CurrencyTransactionModal);

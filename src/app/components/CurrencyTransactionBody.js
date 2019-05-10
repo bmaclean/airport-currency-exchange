@@ -44,6 +44,7 @@ export default withStyles(theme => ({
 	row: {
 		display: 'flex',
 		justifyContent: 'space-between',
+		marginTop: '8px',
 		width: '400px'
 	}
 }))(CurrencyTransactionBody);
