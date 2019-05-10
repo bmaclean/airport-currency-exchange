@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {withStyles} from '@material-ui/core';
-import {CurrencyTable, CurrencyTransactionModal} from '../components';
+import {Snackbar, CurrencyTable, CurrencyTransactionModal} from '../components';
 import {toDecimalPlace} from '../helpers';
 
 /**
@@ -11,18 +11,30 @@ function HomePage(props) {
 	const {baseCurrency, classes, currencies, lastUpdated} = props;
 	const {balance, code, symbol} = baseCurrency;
 
+	let [snackbarOpen, setSnackbarOpen] = useState(false);
+	let [snackbarMessage, setSnackbarMessage] = useState('');
 	let [modalOpen, setModalOpen] = useState(false);
 	let [transactionType, setTransactionType] = useState('');
 	let [currency, setCurrency] = useState('');
-
-	const closeTrader = () => {
-		setModalOpen(false);
-	};
 
 	const openTrader = (transactionType, currency) => {
 		setModalOpen(true);
 		setTransactionType(transactionType);
 		setCurrency(currency);
+	};
+
+	const closeTrader = () => {
+		setModalOpen(false);
+	};
+
+	const openSnackbarWithMessage = message => {
+		setSnackbarOpen(true);
+		setSnackbarMessage(message);
+	};
+
+	const closeSnackbar = message => {
+		setSnackbarOpen(false);
+		setSnackbarMessage('');
 	};
 
 	return (
@@ -42,9 +54,14 @@ function HomePage(props) {
 				open={modalOpen}
 				closeModal={closeTrader}
 				transactionType={transactionType}
-				currency={(currency && currency.code) || ''}
-				symbol={(currency && currency.symbol) || ''}
+				currency={currency}
 				rate={transactionType === 'Buy' ? currency.buyRate : currency.sellRate}
+				onInvalidTransaction={openSnackbarWithMessage}
+			/>
+			<Snackbar
+				message={snackbarMessage}
+				open={snackbarOpen}
+				close={closeSnackbar}
 			/>
 		</div>
 	);
