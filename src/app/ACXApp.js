@@ -12,6 +12,27 @@ import config from '../config/currencies.json';
  * to application subtree. Handles app routing.
  */
 function ACXApp(props) {
+	const {dispatch, settings} = props;
+
+	// TODO: this is a workaround to implement currency data polling
+	//       in the future, this should be implemented using redux-saga
+	let timeout;
+	const pollCurrencyData = (base, currencies) => {
+		dispatch(fetchCurrencies(base, currencies));
+		timeout = setTimeout(
+			() => pollCurrencyData(base, currencies),
+			settings.refreshRate.value * 1000
+		);
+		return timeout;
+	};
+
+	useEffect(() => {
+		pollCurrencyData(config.baseCurrency, Object.keys(config.currencies));
+
+		return function cleanup() {
+			clearInterval(timeout);
+		};
+	});
 
 	return (
 		<Router>

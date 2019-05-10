@@ -4,17 +4,23 @@ import {
 	BUY_CURRENCY,
 	SELL_CURRENCY,
 	RECEIVE_CURRENCIES,
+	FETCH_CURRENCIES_FAILURE,
 	UPDATE_SETTINGS
-} from '../actions';
+} from './actions';
 import * as CH from './helpers/CurrencyHelpers';
-import currencyConfig from '../../../config/currencies.json';
+import currencyConfig from '../../config/currencies.json';
 
 const INITIAL_STATE = {
+	polling: {
+		// whether or not the previous currency poll was successful
+		pollingSuccessful: true
+	},
 	// admin settings
 	settings: {
+		// currency data polling rate
 		refreshRate: {
 			label: 'Refresh currency exchange rates every',
-			value: 3600,
+			value: 60,
 			unit: 'seconds'
 		},
 		// Margin that the currency exchange office makes on transactions
@@ -111,29 +117,43 @@ const INITIAL_STATE = {
 const acxAppReducer = handleActions(
 	{
 		[BUY_CURRENCY]: (state, action) => {
-			state = CH.reduceCurrency(state, action.currency, action.currencyAmount);
-			return CH.increaseCurrency(
+			let newState = CH.reduceCurrency(
 				state,
 				action.baseCurrency,
 				action.baseCurrencyAmount
+			);
+			return CH.increaseCurrency(
+				newState,
+				action.currency,
+				action.currencyAmount
 			);
 		},
 
 		[SELL_CURRENCY]: (state, action) => {
-			state = CH.reduceCurrency(
+			let newState = CH.reduceCurrency(
 				state,
+				action.currency,
+				action.currencyAmount
+			);
+			return CH.increaseCurrency(
+				newState,
 				action.baseCurrency,
 				action.baseCurrencyAmount
 			);
-			return CH.increaseCurrency(state, action.currency, action.currencyAmount);
 		},
 
 		[RECEIVE_CURRENCIES]: (state, action) => {
-			return CH.updateCurrencyRates(
+			// in updateCurrencyRate, compare previous
+			let newState = CH.updateCurrencyRates(
 				state,
 				action.rates,
 				state.settings.marginPct.value
 			);
+			return CH.setPollingSuccess(newState, true);
+		},
+
+		[FETCH_CURRENCIES_FAILURE]: (state, action) => {
+			return CH.setPollingSuccess(state, false);
 		},
 
 		[UPDATE_SETTINGS]: (state, action) => {

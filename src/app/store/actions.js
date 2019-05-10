@@ -83,13 +83,13 @@ export function fetchCurrencies(baseCurrency, currencies) {
 			)}`
 		)
 			.then(
-				response => response.json(),
+				response => receiveCurrencies(response.json()),
 				error => {
 					// eslint-disable-next-line no-console
 					console.error('An error occurred.', error);
-					dispatch(fetchCurrenciesFailed());
+					return fetchCurrenciesFailed();
 				}
 			)
-			.then(data => dispatch(receiveCurrencies(data)));
+			.then(action => dispatch(action));
 	};
 }

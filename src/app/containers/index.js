@@ -1,2 +1,2 @@
-export {default as Admin} from './Admin';
-export {default as Home} from './Home';
+export {default as AdminContainer} from './AdminContainer';
+export {default as HomeContainer} from './HomeContainer';
