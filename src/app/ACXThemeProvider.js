@@ -20,7 +20,8 @@ const THEME = createMuiTheme({
 		}
 	},
 	typography: {
-		fontFamily: ['Montserrat', 'sans-serif'].join(',')
+		fontFamily: ['Montserrat', 'sans-serif'].join(','),
+		useNextVariants: true
 	}
 });
 

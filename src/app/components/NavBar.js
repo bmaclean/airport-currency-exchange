@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {Tabs, Tab, withStyles} from '@material-ui/core';
 import {Error} from '@material-ui/icons';
@@ -16,6 +16,7 @@ function NavBar(props) {
 	) : (
 		'Home'
 	);
+	let [selectedIndex, setSelectedIndex] = useState(0);
 
 	return (
 		<div className={classes.navBarContainer}>
@@ -23,42 +24,47 @@ function NavBar(props) {
 				className={classes.tabBar}
 				indicatorColor="secondary"
 				variant="fullWidth"
+				value={selectedIndex}
 			>
-				{isMobile ? (
-					[
-						<Tab
-							key="mobile-tab-dashboard"
-							icon={<Home />}
-							component={Link}
-							to="/"
-						/>,
-						<Tab
-							key="mobile-tab-admin"
-							icon={<Person />}
-							component={Link}
-							to="/admin"
-						/>
-					]
-				) : (
-					<>
-						<Tab
-							aria-label="Dashboard"
-							className={classes.tab}
-							color="inherit"
-							label={homeLabel}
-							component={Link}
-							to="/"
-						/>
-						<Tab
-							aria-label="Admin"
-							className={classes.tab}
-							color="inherit"
-							label="Admin"
-							component={Link}
-							to="/admin"
-						/>
-					</>
-				)}
+				{isMobile
+					? [
+							<Tab
+								key="mobile-tab-dashboard"
+								icon={<Home />}
+								component={Link}
+								to="/"
+								onClick={() => setSelectedIndex(0)}
+							/>,
+							<Tab
+								key="mobile-tab-admin"
+								icon={<Person />}
+								component={Link}
+								to="/admin"
+								onClick={() => setSelectedIndex(1)}
+							/>
+					  ]
+					: [
+							<Tab
+								key="desktop-tab-dashboard"
+								aria-label="Dashboard"
+								className={classes.tab}
+								color="inherit"
+								label={homeLabel}
+								component={Link}
+								to="/"
+								onClick={() => setSelectedIndex(0)}
+							/>,
+							<Tab
+								key="desktop-tab-admin"
+								aria-label="Admin"
+								className={classes.tab}
+								color="inherit"
+								label="Admin"
+								component={Link}
+								to="/admin"
+								onClick={() => setSelectedIndex(1)}
+							/>
+					  ]}
 			</Tabs>
 		</div>
 	);
