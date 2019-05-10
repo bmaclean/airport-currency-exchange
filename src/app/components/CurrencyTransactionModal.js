@@ -10,6 +10,7 @@ import {
 	TextField
 } from '@material-ui/core';
 import {buyCurrency, sellCurrency} from '../store/actions';
+import {computeTransactionDetails} from '../helpers';
 import {CurrencyTransactionBody} from './';
 
 /**
@@ -19,6 +20,7 @@ import {CurrencyTransactionBody} from './';
  */
 function CurrencyTransactionModal(props) {
 	const {
+		baseCurrency,
 		settings,
 		currency,
 		dispatch,
@@ -28,9 +30,17 @@ function CurrencyTransactionModal(props) {
 		transactionType,
 		rate
 	} = props;
-	const {commissionPct, surcharge, minCommission} = settings;
 
 	let [amount, setAmount] = useState('');
+
+	const {commissionPct, surcharge, minCommission} = settings;
+	const {subtotal, commission, total} = computeTransactionDetails(
+		amount,
+		commissionPct.value,
+		surcharge.value,
+		minCommission.value,
+		rate
+	);
 
 	const resetAndClose = () => {
 		setAmount('');
@@ -38,13 +48,15 @@ function CurrencyTransactionModal(props) {
 	};
 
 	// receive the transaction type, currency code, and amount, then dispatch corresponding action
-	const transact = () => {
+	const transact = total => {
 		switch (transactionType) {
 			case 'Buy':
-				dispatch(buyCurrency(currency, amount));
+				// receive `total` of base currency, lose `amount` of requested currency
+				dispatch(buyCurrency(baseCurrency, total, currency, amount));
 				break;
 			case 'Sell':
-				dispatch(sellCurrency(currency, amount));
+				// lose `amount` of base currency, receive `total` of requested currency
+				dispatch(sellCurrency(baseCurrency, amount, currency, total));
 				break;
 		}
 		resetAndClose();
@@ -75,11 +87,10 @@ function CurrencyTransactionModal(props) {
 					}}
 				/>
 				<CurrencyTransactionBody
-					amount={amount || 0}
-					commissionPct={commissionPct && commissionPct.value}
-					minCommission={minCommission && minCommission.value}
+					commission={commission}
 					rate={rate}
-					surcharge={surcharge && surcharge.value}
+					subtotal={subtotal}
+					total={total}
 				/>
 			</DialogContent>
 			<DialogActions>

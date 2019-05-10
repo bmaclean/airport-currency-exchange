@@ -3,22 +3,11 @@ import {withStyles} from '@material-ui/core';
 import {toDecimalPlace} from '../helpers';
 
 /**
- * CurrencyTransactionBody is the body of the transaction modal that retrieves and displays
+ * CurrencyTransactionBody is the body of the transaction modal that displays
  * the rate, subtotal, commission, and total transaction cost.
  */
 function CurrencyTransactionBody(props) {
-	const {
-		classes,
-		amount,
-		commissionPct,
-		surcharge,
-		minCommission,
-		rate
-	} = props;
-	// TODO: divide pct's by 100
-	const subtotal = amount / rate;
-	const commission = Math.max((commissionPct * parseFloat(subtotal)) + parseFloat(surcharge), minCommission);
-	const total = parseFloat(subtotal) + parseFloat(commission);
+	const {classes, commission, subtotal, rate, total} = props;
 
 	return (
 		<div className={classes.body}>
