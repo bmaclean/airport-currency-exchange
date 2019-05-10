@@ -117,7 +117,6 @@ function CurrencyTransactionModal(props) {
 				<Button onClick={resetAndClose} color="secondary">
 					Cancel
 				</Button>
-				{/* TODO: button hover colours are broken */}
 				<Button onClick={transact} variant="contained" color="primary">
 					{transactionType}
 				</Button>
