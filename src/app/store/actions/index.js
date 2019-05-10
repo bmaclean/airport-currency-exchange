@@ -24,12 +24,36 @@ export const RECEIVE_CURRENCIES = 'RECEIVE_CURRENCIES';
  * ACTION CREATORS
  */
 
-export function buyCurrency(currency, amount) {
-	return {type: BUY_CURRENCY, currency, amount};
+// to buy `baseCurrencyAmount` of baseCurrency using `currencyAmount` of foreign currency
+export function buyCurrency(
+	baseCurrency,
+	baseCurrencyAmount,
+	currency,
+	currencyAmount
+) {
+	return {
+		type: BUY_CURRENCY,
+		baseCurrency,
+		baseCurrencyAmount,
+		currency,
+		currencyAmount
+	};
 }
 
-export function sellCurrency(currency, amount) {
-	return {type: SELL_CURRENCY, currency, amount};
+// to sell `currencyAmount` of foreign currency using `currencyAmount` of foreign currency
+export function sellCurrency(
+	baseCurrency,
+	baseCurrencyAmount,
+	currency,
+	currencyAmount
+) {
+	return {
+		type: SELL_CURRENCY,
+		baseCurrency,
+		baseCurrencyAmount,
+		currency,
+		currencyAmount
+	};
 }
 
 export function updateSettings(updatedSettings) {

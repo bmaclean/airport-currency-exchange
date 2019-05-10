@@ -8,8 +8,35 @@ export function updateCurrencyRates(state, rates, margin) {
 	return update(state, 'currencies', currencies =>
 		currencies.map(currency => ({
 			...currency,
-			buyRate: rates[currency.code] * (1 - parseFloat(margin)),
-			sellRate: rates[currency.code] * (1 + parseFloat(margin))
+			buyRate: rates[currency.code] * (1 - parseFloat(margin / 100)),
+			sellRate: rates[currency.code] * (1 + parseFloat(margin / 100))
 		}))
 	);
+}
+
+/**
+ * reduceCurrency reduces the balance of `currency` in state by `currencyAmount`
+ */
+// TODO: validate when amount > balance (in component)
+export function reduceCurrency(state, currency, currencyAmount) {
+	return update(state, 'currencies', currencies => {
+		return currencies.map(curr => {
+			return curr.code === currency
+				? {...curr, balance: curr.balance - currencyAmount}
+				: curr;
+		});
+	});
+}
+
+/**
+ * increaseCurrency increases the balance of `currency` in state by `currencyAmount`
+ */
+export function increaseCurrency(state, currency, currencyAmount) {
+	return update(state, 'currencies', currencies => {
+		return currencies.map(curr => {
+			return curr.code === currency
+				? {...curr, balance: curr.balance + currencyAmount}
+				: curr;
+		});
+	});
 }

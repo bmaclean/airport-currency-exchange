@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {withStyles} from '@material-ui/core';
 import {CurrencyTable, CurrencyTransactionModal} from '../components';
+import {toDecimalPlace} from '../helpers';
 
 /**
  * HomePage is the main dashboard from which the user can interact with the currency table
@@ -28,14 +29,16 @@ function HomePage(props) {
 		<div className={classes.container}>
 			<span>
 				Exchange rates shown as per {lastUpdated}. You have {symbol}
-				{balance} {code} left.
+				{toDecimalPlace(balance, 2)} {code} left.
 			</span>
 			<CurrencyTable
 				className={classes.table}
 				currencies={currencies}
 				openTrader={openTrader}
 			/>
+			{/* TODO: bloated props */}
 			<CurrencyTransactionModal
+				baseCurrency={baseCurrency}
 				open={modalOpen}
 				closeModal={closeTrader}
 				transactionType={transactionType}

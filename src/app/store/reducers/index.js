@@ -4,7 +4,7 @@ import {
 	BUY_CURRENCY,
 	SELL_CURRENCY,
 	RECEIVE_CURRENCIES,
-	UPDATE_SETTINGS,
+	UPDATE_SETTINGS
 } from '../actions';
 import * as CH from './helpers/CurrencyHelpers';
 import currencyConfig from '../../../config/currencies.json';
@@ -20,25 +20,25 @@ const INITIAL_STATE = {
 		// Margin that the currency exchange office makes on transactions
 		marginPct: {
 			label: 'Buy/Sell rate margin',
-			value: 0.06,
+			value: 5,
 			unit: 'percent'
 		},
 		// Percentage of each transaction earned as commission
 		commissionPct: {
 			label: 'Commission',
-			value: 0.1,
+			value: 10,
 			unit: 'percent'
 		},
 		// Additional flat rate surchage on every transaction
 		surcharge: {
 			label: 'Surcharge',
-			value: 0.75,
+			value: 2.5,
 			unit: 'dollars'
 		},
 		// The minimum commission amount per transaction
 		minCommission: {
 			label: 'Minimum Commission',
-			value: 2.5,
+			value: 1.0,
 			unit: 'dollars'
 		}
 	},
@@ -111,15 +111,29 @@ const INITIAL_STATE = {
 const acxAppReducer = handleActions(
 	{
 		[BUY_CURRENCY]: (state, action) => {
-			return state;
+			state = CH.reduceCurrency(state, action.currency, action.currencyAmount);
+			return CH.increaseCurrency(
+				state,
+				action.baseCurrency,
+				action.baseCurrencyAmount
+			);
 		},
 
 		[SELL_CURRENCY]: (state, action) => {
-			return state;
+			state = CH.reduceCurrency(
+				state,
+				action.baseCurrency,
+				action.baseCurrencyAmount
+			);
+			return CH.increaseCurrency(state, action.currency, action.currencyAmount);
 		},
 
 		[RECEIVE_CURRENCIES]: (state, action) => {
-			return CH.updateCurrencyRates(state, action.rates, '0.08');
+			return CH.updateCurrencyRates(
+				state,
+				action.rates,
+				state.settings.marginPct.value
+			);
 		},
 
 		[UPDATE_SETTINGS]: (state, action) => {

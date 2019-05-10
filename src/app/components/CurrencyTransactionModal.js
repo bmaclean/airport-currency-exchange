@@ -48,15 +48,15 @@ function CurrencyTransactionModal(props) {
 	};
 
 	// receive the transaction type, currency code, and amount, then dispatch corresponding action
-	const transact = total => {
+	const transact = () => {
 		switch (transactionType) {
 			case 'Buy':
 				// receive `total` of base currency, lose `amount` of requested currency
-				dispatch(buyCurrency(baseCurrency, total, currency, amount));
+				dispatch(buyCurrency(baseCurrency.code, total, currency, amount));
 				break;
 			case 'Sell':
 				// lose `amount` of base currency, receive `total` of requested currency
-				dispatch(sellCurrency(baseCurrency, amount, currency, total));
+				dispatch(sellCurrency(baseCurrency.code, amount, currency, total));
 				break;
 		}
 		resetAndClose();
@@ -97,6 +97,7 @@ function CurrencyTransactionModal(props) {
 				<Button onClick={resetAndClose} color="secondary">
 					Cancel
 				</Button>
+				{/* TODO: button hover colours are broken */}
 				<Button onClick={transact} variant="contained" color="primary">
 					{transactionType}
 				</Button>

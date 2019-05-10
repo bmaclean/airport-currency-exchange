@@ -5,10 +5,9 @@ export default function computeTransactionDetails(
 	minCommission = 0,
 	rate = 1
 ) {
-	//TODO: divide ptc's by 100
 	const subtotal = amount / rate;
 	const commission = Math.max(
-		commissionPct * parseFloat(subtotal) + parseFloat(surcharge),
+		(commissionPct / 100) * parseFloat(subtotal) + parseFloat(surcharge),
 		minCommission
 	);
 	const total = parseFloat(subtotal) + parseFloat(commission);
