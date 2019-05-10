@@ -1,4 +1,4 @@
-import {update} from 'timm';
+import {update, setIn} from 'timm';
 
 /**
  * updateCurrencyRates receives the previous state, new rates, and the buy/sell rate margin,
@@ -35,8 +35,18 @@ export function increaseCurrency(state, currency, currencyAmount) {
 	return update(state, 'currencies', currencies => {
 		return currencies.map(curr => {
 			return curr.code === currency
-				? {...curr, balance: curr.balance + currencyAmount}
+				? {
+						...curr,
+						balance: parseFloat(curr.balance) + parseFloat(currencyAmount)
+				  }
 				: curr;
 		});
 	});
+}
+
+/**
+ * setPollingSuccess updates the polling success status in `state` to `status`
+ */
+export function setPollingSuccess(state, status) {
+	return setIn(state, ['polling', 'pollingSuccessful'], status);
 }
