@@ -47,7 +47,6 @@ function CurrencyTransactionModal(props) {
 		closeModal();
 	};
 
-	// TODO: move funds validation?
 	// receive the transaction type, currency code, and amount, then dispatch corresponding action
 	const transact = () => {
 		switch (transactionType) {

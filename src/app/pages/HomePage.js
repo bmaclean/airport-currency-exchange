@@ -48,7 +48,6 @@ function HomePage(props) {
 				currencies={currencies}
 				openTrader={openTrader}
 			/>
-			{/* TODO: bloated props */}
 			<CurrencyTransactionModal
 				baseCurrency={baseCurrency}
 				open={modalOpen}
@@ -69,7 +68,6 @@ function HomePage(props) {
 
 export default withStyles(theme => ({
 	container: {
-		// TODO: fix height
 		height: '100%',
 		display: 'flex',
 		alignItems: 'center',

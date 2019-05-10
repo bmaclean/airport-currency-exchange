@@ -4,14 +4,14 @@ import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 // retrieved from provided logo and sample website
 const ACX_YELLOW = '#ffef06';
 const BLACK = '#000';
+const GREY = '#7D7D7D';
 const WHITE = '#FFF';
 
-// TODO: dark mode; toggle in admin settings
 const THEME = createMuiTheme({
 	palette: {
 		primary: {
 			main: ACX_YELLOW,
-			dark: BLACK,
+			dark: GREY,
 			constrastText: BLACK
 		},
 		secondary: {

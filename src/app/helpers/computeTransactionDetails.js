@@ -1,3 +1,7 @@
+/**
+ * Given the admin settings and requested amount, computeTransactionDetails returns
+ * the computed subtotal, commission, and transaction total.
+ */
 export default function computeTransactionDetails(
 	amount = 0,
 	commissionPct = 0,

@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-	TableCell,
-	TableHead,
-	TableRow,
-	withStyles
-} from '@material-ui/core';
+import {TableCell, TableHead, TableRow} from '@material-ui/core';
 
 /**
  * CurrencyTableHead provides the header for the CurrencyTable with predefined column labels.
