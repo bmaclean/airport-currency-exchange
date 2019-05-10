@@ -4,10 +4,10 @@ import {HomePage} from '../pages';
 import config from '../../config/currencies.json';
 
 /**
- * Home is the container component for the Home Page that connects to the Redux store and
+ * HomeContainer is the container component for the Home Page that connects to the Redux store and
  * provide HomePage with relevant data.
  */
-function Home(props) {
+function HomeContainer(props) {
 	const {currencies} = props;
 	const baseCurrency = currencies.find(
 		currency => currency.code === config.baseCurrency
@@ -26,4 +26,4 @@ function mapStateToProps(state) {
 	return {currencies};
 }
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(HomeContainer);

@@ -4,10 +4,10 @@ import {updateSettings} from '../store/actions';
 import {AdminPage} from '../pages';
 
 /**
- * Admin is the container component for the Admin Page that connects to the Redux store and
+ * AdminContainer is the container component for the Admin Page that connects to the Redux store and
  * provide AdminPage with relevant data.
  */
-function Admin(props) {
+function AdminContainer(props) {
 	const {dispatch, settings} = props;
 	const [localSettings, updateLocalSettings] = useState(settings);
 
@@ -41,4 +41,4 @@ function mapStateToProps(state) {
 	return {settings};
 }
 
-export default connect(mapStateToProps)(Admin);
+export default connect(mapStateToProps)(AdminContainer);
