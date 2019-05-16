@@ -1,7 +1,7 @@
 # Airport Currency Exchange
 
 ### About Airport Currency Exchange
-About Airport Currency Exchange is an application for managing a currency exchange office. It provides an interface to buy/sell foreign currencies, and allows the administrator to configure the following settings:
+Airport Currency Exchange is an application for managing a currency exchange office. It provides an interface to buy/sell foreign currencies, and allows the administrator to configure the following settings:
 
 - **Refresh Rate** - The rate (in seconds) at which the currency data should be updated.
 - **Buy/Sell Rate Margin** - The margin applied to the listed buy/sell rates of the exchange.
