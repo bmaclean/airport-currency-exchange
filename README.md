@@ -5,7 +5,7 @@
 ![An image of the application Currency Exchange Modal.](./screenshots/ACX-Exchange-Modal.png?raw=true "Currency Exchange Modal")
 
 ### About Airport Currency Exchange
-About Airport Currency Exchange is an application for managing a currency exchange office. It provides an interface to buy/sell foreign currencies, and allows the administrator to configure the following settings:
+Airport Currency Exchange is an application for managing a currency exchange office. It provides an interface to buy/sell foreign currencies, and allows the administrator to configure the following settings:
 
 - **Refresh Rate** - The rate (in seconds) at which the currency data should be updated.
 - **Buy/Sell Rate Margin** - The margin applied to the listed buy/sell rates of the exchange.
@@ -27,7 +27,3 @@ The following improvements are features and fixes that I would implement given m
 - **Refactoring** - As I implemented the last remaining features, some components (such as `CurrencyTransactionModal`) became quite bloated. Given more time, these components could be refactored to follow SRP and be more composable.
 - **Testing** - While working to complete the code challenge this week, writing consistent unit tests fell by the wayside. I normally write tests progressively as I work through problems, but felt my time was better spent implementing as many features as possible.
 - **Redux-Saga** - Currently, the application uses the Hooks useEffect API to intermittently poll for currency data. Given that I was most unfamiliar with Redux-Saga, I didn't leverage it to manage asynchronous data fetching, though I'd like to do so in the future.
-
-### Final Comments
-
-Thank you for the opportunity to interview with SelfDecode! I've really enjoyed the application process, and look forward to hearing back from the team.
