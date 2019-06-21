@@ -20,14 +20,16 @@
     "redux-actions": "^2.6.5",
     "redux-saga": "^1.0.2",
     "redux-thunk": "^2.3.0",
+    "serve": "^11.0.2",
     "timm": "^1.6.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
+    "start": "serve -s build",
     "build": "react-scripts build",
     "test": "react-scripts test",
-	"eject": "react-scripts eject",
-	"heroku-postbuild": "npm run build"
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm run build"
   },
   "jest": {
     "snapshotSerializers": [
