@@ -23,7 +23,7 @@ To bootstrap the application setup, I used [Create React App](https://github.com
 
 The following improvements are features and fixes that I would implement given more development time:
 
-- **Validation** - The application has minimal validation, requiring only that numerical inputs are numerical. Inputs should be required to be non-negative, and should be validated through form submission.
+- **Validation** - The application has minimal validation on form inputs. Inputs should be required to be non-negative, and should be validated through form submission.
 - **Refactoring** - As I implemented the last remaining features, some components (such as `CurrencyTransactionModal`) became quite bloated. Given more time, these components could be refactored to follow SRP and be more composable.
 - **Testing** - While working to complete the code challenge this week, writing consistent unit tests fell by the wayside. I normally write tests progressively as I work through problems, but felt my time was better spent implementing as many features as possible.
 - **Redux-Saga** - Currently, the application uses the Hooks useEffect API to intermittently poll for currency data. Given that I was most unfamiliar with Redux-Saga, I didn't leverage it to manage asynchronous data fetching, though I'd like to do so in the future.
